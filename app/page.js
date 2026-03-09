@@ -1,10 +1,32 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Hero from "@/components/Hero";
 import PlaceCard from "@/components/PlaceCard";
-import { places } from "@/lib/data";
+import Button from "@/components/ui/Button";
 
 export default function Home() {
-  // Filter for featured/approved places, take first 3-4
-  const featuredPlaces = places.filter(place => place.status === "Approved").slice(0, 4);
+  const [featuredPlaces, setFeaturedPlaces] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFeaturedPlaces = async () => {
+      try {
+        const res = await fetch("/api/Upload");
+        const data = await res.json();
+
+        // Filter for approved places and take first 4
+        const approved = data.filter(place => place.status === "Approved").slice(0, 4);
+        setFeaturedPlaces(approved);
+      } catch (error) {
+        console.error("Failed to fetch featured places:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeaturedPlaces();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -23,16 +45,27 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredPlaces.map((place) => (
-              <PlaceCard key={place.id} place={place} />
-            ))}
+            {loading ? (
+              // Loading skeleton
+              Array(4).fill(0).map((_, i) => (
+                <div key={i} className="bg-gray-200 rounded-2xl h-80 animate-pulse"></div>
+              ))
+            ) : featuredPlaces.length > 0 ? (
+              featuredPlaces.map((place) => (
+                <PlaceCard key={place.id} place={place} />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-muted text-lg">No approved places available yet</p>
+              </div>
+            )}
           </div>
 
           <div className="mt-16 text-center">
             <a href="/places" className="inline-block">
-              <button className="px-8 py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all duration-300">
+              <Button variant="outline" size="lg">
                 View All Places
-              </button>
+              </Button>
             </a>
           </div>
         </div>
@@ -46,9 +79,9 @@ export default function Home() {
             Share your favorite destination with our community and help others discover amazing places.
           </p>
           <a href="/upload">
-            <button className="bg-primary text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-primary-hover hover:scale-105 transition-all">
+            <Button variant="primary" size="lg">
               Upload a Place
-            </button>
+            </Button>
           </a>
         </div>
       </section>

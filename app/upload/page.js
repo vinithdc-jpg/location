@@ -105,7 +105,7 @@ export default function UploadPage() {
                         value={formData.place_name}
                         onChange={handleChange}
                         required
-                        className="w-full border p-3 rounded-lg"
+                        className="w-full border border-border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                     />
 
                     <input
@@ -115,7 +115,7 @@ export default function UploadPage() {
                         value={formData.location}
                         onChange={handleChange}
                         required
-                        className="w-full border p-3 rounded-lg"
+                        className="w-full border border-border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                     />
 
                     <select
@@ -123,7 +123,7 @@ export default function UploadPage() {
                         value={formData.category}
                         onChange={handleChange}
                         required
-                        className="w-full border p-3 rounded-lg"
+                        className="w-full border border-border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                     >
                         <option value="">Select Category</option>
                         <option value="Beach">Beach</option>
@@ -139,17 +139,18 @@ export default function UploadPage() {
                         value={formData.description}
                         onChange={handleChange}
                         required
-                        className="w-full border p-3 rounded-lg"
+                        className="w-full border border-border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                     />
 
                     <div>
-                        <label className="block mb-2">Upload Image</label>
+                        <label className="block mb-2 font-medium text-foreground">Upload Image</label>
 
                         <input
                             type="file"
                             accept="image/*"
                             onChange={handleFileChange}
                             required
+                            className="w-full border border-border p-2 rounded-lg cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition-all"
                         />
                     </div>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import PlaceCard from "@/components/PlaceCard";
+import Button from "@/components/ui/Button";
 import { Search } from "lucide-react";
 
 export default function PlacesPage() {
@@ -67,7 +68,7 @@ export default function PlacesPage() {
                         <input
                             type="text"
                             placeholder="Search places..."
-                            className="w-full pl-10 pr-3 py-3 border rounded-lg"
+                            className="w-full pl-10 pr-3 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -87,12 +88,13 @@ export default function PlacesPage() {
                             No places found matching your search.
                         </p>
 
-                        <button
+                        <Button
                             onClick={() => setSearchTerm("")}
-                            className="mt-4 text-primary font-medium hover:underline"
+                            variant="ghost"
+                            className="mt-4"
                         >
                             Clear Search
-                        </button>
+                        </Button>
                     </div>
                 )}
             </div>

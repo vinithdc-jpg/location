@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import Button from "@/components/ui/Button"
 
 export default function Login() {
   const router = useRouter()
@@ -64,9 +65,9 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-600">
+    <div className="min-h-screen flex items-center justify-center bg-primary/10 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">
+        <h2 className="text-3xl font-bold text-center text-foreground mb-6">
           Welcome Back
         </h2>
 
@@ -92,7 +93,7 @@ export default function Login() {
             required
             disabled={loading}
             placeholder="Enter your email"
-            className="w-full px-4 py-2 border border-blue-200 rounded-lg"
+            className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
           />
 
           <input
@@ -103,22 +104,23 @@ export default function Login() {
             required
             disabled={loading}
             placeholder="Enter your password"
-            className="w-full px-4 py-2 border border-blue-200 rounded-lg"
+            className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
           />
 
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold"
+            variant="primary"
+            className="w-full"
           >
             {loading ? "Logging in..." : "Login"}
-          </button>
+          </Button>
 
         </form>
 
-        <p className="text-center text-sm text-blue-600 mt-4">
+        <p className="text-center text-sm text-muted mt-4">
           Don't have an account?{" "}
-          <Link href="/Signup" className="font-semibold hover:underline">
+          <Link href="/Signup" className="font-semibold text-primary hover:underline">
             Sign Up
           </Link>
         </p>
