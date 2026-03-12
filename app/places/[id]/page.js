@@ -1,7 +1,9 @@
 import { MapPin, Calendar, Wallet } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { reviews } from "@/lib/review";
 import Button from "@/components/ui/Button";
+import ReviewSection from "@/components/reviews";
 
 export default async function PlaceDetails({ params }) {
 
@@ -145,7 +147,9 @@ export default async function PlaceDetails({ params }) {
                         </div>
 
                     </div>
-
+                    <div >
+                        <ReviewSection placeId={place.id} reviews={reviews} />
+                    </div>
                 </div>
 
             </div>
